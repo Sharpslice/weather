@@ -34,6 +34,7 @@ export function searchBar(){
     let searchBar = document.getElementById("searchBar");
     let form = document.createElement("form");
     let input = document.createElement("input");
+    input.id = "search"
     input.placeholder = "City";
     form.appendChild(input);
     searchBar.appendChild(form);

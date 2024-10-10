@@ -9,9 +9,9 @@ export default function forecast(foreCastArray)
 
 
     
-
+    let forecastContainer = document.createElement("ul")
     foreCastArray.forEach( (element) =>{
-        let forecastContainer = document.createElement("ul")
+        
         let dayDiv = document.createElement("li");
 
         let day = document.createElement("span");
@@ -29,13 +29,15 @@ export default function forecast(foreCastArray)
         dayDiv.appendChild(day);
         dayDiv.appendChild(minTemp);
         dayDiv.appendChild(maxTemp);
-        fragment.appendChild(dayDiv);
-        
+        forecastContainer.appendChild(dayDiv);
+                
     });
+    fragment.appendChild(forecastContainer);
     rightSideDiv.appendChild(fragment)
 } 
 export function description222(data){
     let div = document.createElement("div");
+    div.id="description"
     let desc = document.createElement("span");
 
     let conditions = data.currentConditions;
