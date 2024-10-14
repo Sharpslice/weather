@@ -21,9 +21,9 @@ export async function getWeatherLocation(location)
 export function currentCondition(data){
     return data.currentConditions;
 }
-export function get10DayForecast(data)
+export function get5DayForecast(data)
 {
-    let foreCastArray = (data.days).slice(0,11);
+    let foreCastArray = (data.days).slice(0,6);
     
     return foreCastArray;
     

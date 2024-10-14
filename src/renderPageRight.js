@@ -1,58 +1,46 @@
 
 import {format, parseISO} from 'date-fns';
-
-export default function forecast(foreCastArray)
-{
-    const rightSideDiv = document.getElementById("rightSide");
-    
-    const fragment = document.createDocumentFragment();
+import {getHours,parse} from 'date-fns';
 
 
-    
-    let forecastContainer = document.createElement("ul")
-    foreCastArray.forEach( (element) =>{
-        
-        let dayDiv = document.createElement("li");
 
+export function forecast(forecastData){
+    const forecastDiv = document.getElementById("forecast");
+    forecastData.forEach((element)=>{
+        let dayDiv = document.createElement("div");
         let day = document.createElement("span");
-
-
-        let dayOfWeek = dayIntoWeek(element.datetime)
-        day.textContent=dayOfWeek;
-        
-        let minTemp = document.createElement("span");
-        minTemp.textContent = element.tempmin;
-
-        let maxTemp = document.createElement("span");
-        maxTemp.textContent = element.tempmax;
-
+        day.textContent= dayIntoWeek(element.datetime);
+        let temp = document.createElement("span");
+        temp.textContent=element.temp;
         dayDiv.appendChild(day);
-        dayDiv.appendChild(minTemp);
-        dayDiv.appendChild(maxTemp);
-        forecastContainer.appendChild(dayDiv);
-                
-    });
-    fragment.appendChild(forecastContainer);
-    rightSideDiv.appendChild(fragment)
-} 
-export function description222(data){
-    let div = document.createElement("div");
-    div.id="description"
-    let desc = document.createElement("span");
-
-    let conditions = data.currentConditions;
-  
-    desc.textContent = conditions.conditions;
-    console.log(conditions.conditions)
-    let feelsLike = document.createElement("span");
-    feelsLike.textContent= conditions.feelslike
-    div.appendChild(desc);
-    div.appendChild(feelsLike);
-    const rightSideDiv = document.getElementById("rightSide");
-    rightSideDiv.appendChild(div);
-
+        dayDiv.appendChild(temp);
+        
+        forecastDiv.appendChild(dayDiv);
+    })
+    
 }
 
+export function hours(day){
+    let hourlyDiv = document.getElementById("hourly");
+    (day.hours).forEach((element)=>{
+        console.log(element.datetime)
+        let hourDiv = document.createElement("div");
+        let time = document.createElement("span");
+        time.textContent=timeIntoHour(element.datetime);
+
+        let temp = document.createElement("span");
+        temp.textContent=Math.trunc(element.temp);
+
+        hourDiv.appendChild(time);
+        hourDiv.appendChild(temp);
+        hourlyDiv.appendChild(hourDiv);
+    });
+    
+}
+function timeIntoHour(dateStr){
+    const time = parse(dateStr, 'HH:mm:ss', new Date());
+    return getHours(time);
+}
 function dayIntoWeek(dateStr){
     const date = parseISO(dateStr);
 

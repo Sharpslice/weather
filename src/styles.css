@@ -4,7 +4,6 @@
 
 }
 
-
 *{
     margin: 0;
     padding: 0;
@@ -17,24 +16,37 @@
     width: 100vw;
     height: 100vh;
     display: flex;
+    align-items: center;
+    flex-direction: column;
     font-family: 'CustomFont',sans-serif;
 }
-#leftSide{
-    flex: 0.4;
+
+#currentData > div{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-#rightSide{
+#module{
+    display: flex;
+}
+#module > div{
     display: flex;
     flex-direction: column;
-    gap: calc(15rem/16);
+    align-items: center;
 }
-
-
-
-
-
-input{
-    width: 100%;
+#forecast{
+    display: flex;
+}
+#forecast>div{
+    display: flex;
+    flex-direction: column;
+}
+#hourly{
+    gap: 10px;
+    display: flex;
+    flex-wrap: true ;
+}
+#hourly >div{
+    display: flex;
+    flex-direction: column;
 }
