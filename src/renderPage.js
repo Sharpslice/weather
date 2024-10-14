@@ -1,47 +1,20 @@
 import { buttonListeners } from "./buttons";
 import { currentCondition } from "./weatherFunctions";
 
-export function switches(){
-    const switchContainer = document.getElementById("switches")
-    const darkMode = document.createElement("button");
-    darkMode.textContent="dark";
-    darkMode.id = "darkMode"
 
-    const degrees = document.createElement("button");
-    degrees.textContent="celcius";
-    degrees.id = "degrees"
-    switchContainer.appendChild(degrees)
-
-    switchContainer.appendChild(darkMode)
-    addEventListeners();
-
-
-}
-
-function addEventListeners(){
-    const darkMode = document.getElementById("darkMode");
-    darkMode.addEventListener('click',(e)=>{
-        console.log("dark mode clicked")
-    })
-
-    const degrees = document.getElementById("degrees");
-    degrees.addEventListener('click',(e)=>{
-        console.log("degrees clicked")
-    })
-}
 
 export function searchBar(){
-    let searchBar = document.getElementById("searchBar");
+    let header = document.getElementById("header");
     let form = document.createElement("form");
     let input = document.createElement("input");
     input.id = "search"
     input.placeholder = "City";
     form.appendChild(input);
-    searchBar.appendChild(form);
+    header.appendChild(form);
 }
 
 export function currentWeatherDisplay(json){
-    let weatherDiv = document.getElementById("currentWeatherDiv");
+    let weatherDiv = document.getElementById("currentData");
     let div = document.createElement("div");
     
 
@@ -62,17 +35,45 @@ export function currentWeatherDisplay(json){
 
 export function currentWeatherInfoExtended(json){
     let info = currentCondition(json);
+    const weatherInfoDiv = document.getElementById("module");
+
+    const weatherIcons=
+    {
+        "clear": 'icons/night.png'
+    }
+
+    const weatherSymbolDiv = document.createElement("div");
+    const weatherSymbol = document.createElement("img");
+    weatherSymbol.src = './icons/night.png';
+    weatherSymbol.width =100;
+    weatherSymbol.height=100;
+    weatherSymbolDiv.appendChild(weatherSymbol);
+    weatherInfoDiv.appendChild(weatherSymbolDiv);
+
+    const currentTempDiv = document.createElement("div");
+    const temp = document.createElement("Span");
+    temp.textContent = `${Math.trunc(info.temp)} F°`;
+    currentTempDiv.appendChild(temp);
+    weatherInfoDiv.appendChild(currentTempDiv)
+
+
+
+
+
+
     const elementData = 
     [
-        {title: "sunrise", textContent: info.sunrise},
-        {title: "sunset", textContent: info.sunset},
-        {title: "humidity", textContent: info.humidity},
-        {title: "uvindex", textContent: info.uvindex},
+        {title: "sunrise: ", textContent: info.sunrise},
+        {title: "sunset: ", textContent: info.sunset},
+        {title: "humidity: ", textContent: info.humidity},
+        {title: "uvindex: ", textContent: info.uvindex},
     ];
 
-    const weatherInfoDiv = document.getElementById("weatherInfoTabs");
+    
+    let infoDiv = document.createElement("div");
+    infoDiv.id="extendedInfo"
     elementData.forEach( ({title,textContent}) =>{
-        let infoDiv = document.createElement("div");
+        let extendedInfoDiv = document.createElement("div");
 
         let titleOfDiv = document.createElement("span");
         titleOfDiv.textContent = title;
@@ -80,8 +81,9 @@ export function currentWeatherInfoExtended(json){
         let contentOfDiv = document.createElement("span");
         contentOfDiv.textContent = textContent;
 
-        infoDiv.appendChild(titleOfDiv);
-        infoDiv.appendChild(contentOfDiv);
+        extendedInfoDiv.appendChild(titleOfDiv);
+        extendedInfoDiv.appendChild(contentOfDiv);
+        infoDiv.appendChild(extendedInfoDiv)
         
         weatherInfoDiv.appendChild(infoDiv);
     });
