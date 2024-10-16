@@ -1,5 +1,9 @@
 
-
+import nightIcon from "./icons/night.png"
+import sunnyIcon from "./icons/sunny.png"
+import cloudyIcon from "./icons/cloudy.png"
+import cloudyNightIcon from "./icons/cloudy-night.png";
+import rainIcon from "./icons/rain.png";
 export async function getWeatherLocation(location)
 {
     const apiKey = "XWKHC533BBTH5QXSTETE2P8P3";
@@ -27,6 +31,20 @@ export function get5DayForecast(data)
     
     return foreCastArray;
     
+}
+
+export function getWeatherIcon(icon){
+    const weatherIcons=
+    {
+        "clear-day": sunnyIcon,
+        "clear-night": nightIcon,
+        "partly-cloudy-day": cloudyIcon,
+        "cloudy": cloudyIcon,
+        "partly-cloudy-night": cloudyNightIcon,
+        "rain": rainIcon,
+    }
+
+    return weatherIcons[icon];
 }
 
 export function hourlyWeather(data){

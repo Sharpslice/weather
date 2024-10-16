@@ -19,6 +19,12 @@
     align-items: center;
     flex-direction: column;
     font-family: 'CustomFont',sans-serif;
+    font-size: 30px;
+    
+}
+#content{
+    width: 80%;
+    
 }
 
 #currentData > div{
@@ -28,25 +34,40 @@
 }
 #module{
     display: flex;
+    justify-content: center;
 }
-#module > div{
+#module > div:not(#extendedInfo){
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    padding: 0px 50px;
+    width: calc(200rem/16)s;
+}
+#extendedInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
 }
 #forecast{
     display: flex;
+    justify-content: center;
 }
 #forecast>div{
     display: flex;
     flex-direction: column;
+    align-items: center;
+    width: calc(75rem/16);
 }
 #hourly{
     gap: 10px;
     display: flex;
+    justify-content: center;
     flex-wrap: true ;
 }
 #hourly >div{
     display: flex;
     flex-direction: column;
+    align-items: center;
+    width: calc(75rem/16);
 }

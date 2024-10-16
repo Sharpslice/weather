@@ -1,6 +1,4 @@
-import { buttonListeners } from "./buttons";
-import { currentCondition } from "./weatherFunctions";
-
+import { currentCondition, getWeatherIcon } from "./weatherFunctions";
 
 
 export function searchBar(){
@@ -37,17 +35,19 @@ export function currentWeatherInfoExtended(json){
     let info = currentCondition(json);
     const weatherInfoDiv = document.getElementById("module");
 
-    const weatherIcons=
-    {
-        "clear": 'icons/night.png'
-    }
+  
 
     const weatherSymbolDiv = document.createElement("div");
     const weatherSymbol = document.createElement("img");
-    weatherSymbol.src = './icons/night.png';
+    weatherSymbol.src = getWeatherIcon(info.icon);
     weatherSymbol.width =100;
     weatherSymbol.height=100;
+
+    const weatherCondition = document.createElement("span");
+    weatherCondition.textContent=info.conditions;
+    
     weatherSymbolDiv.appendChild(weatherSymbol);
+    weatherSymbolDiv.appendChild(weatherCondition);
     weatherInfoDiv.appendChild(weatherSymbolDiv);
 
     const currentTempDiv = document.createElement("div");
