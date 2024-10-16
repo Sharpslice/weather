@@ -7,8 +7,10 @@ import { getWeatherIcon } from './weatherFunctions';
 
 export function forecast(forecastData){
     const forecastDiv = document.getElementById("forecast");
-    forecastData.forEach((element)=>{
+    forecastData.forEach((element,index)=>{
         let dayDiv = document.createElement("div");
+        dayDiv.classList ="forecastDay";
+        dayDiv.setAttribute("day",index)
         let day = document.createElement("span");
         day.textContent= (dayIntoWeek(element.datetime)).slice(0,3);
 
@@ -27,6 +29,7 @@ export function forecast(forecastData){
         dayDiv.appendChild(temp);
         
         forecastDiv.appendChild(dayDiv);
+    
     })
     
 }
@@ -34,7 +37,7 @@ export function forecast(forecastData){
 export function hours(day){
     let hourlyDiv = document.getElementById("hourly");
     (day.hours).forEach((element)=>{
-        console.log(element.datetime)
+        
         let hourDiv = document.createElement("div");
         let time = document.createElement("span");
         time.textContent=timeIntoHour(element.datetime);
