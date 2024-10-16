@@ -1,21 +1,35 @@
 
 import {format, parseISO} from 'date-fns';
 import {getHours,parse} from 'date-fns';
+import { getWeatherIcon } from './weatherFunctions';
 
 
 
 export function forecast(forecastData){
     const forecastDiv = document.getElementById("forecast");
-    forecastData.forEach((element)=>{
+    forecastData.forEach((element,index)=>{
         let dayDiv = document.createElement("div");
+        dayDiv.classList ="forecastDay";
+        dayDiv.setAttribute("day",index)
         let day = document.createElement("span");
-        day.textContent= dayIntoWeek(element.datetime);
+        day.textContent= (dayIntoWeek(element.datetime)).slice(0,3);
+
+        let weatherIcon = document.createElement("img");
+        
+        weatherIcon.src = getWeatherIcon(element.icon);
+        weatherIcon.width= 50
+        weatherIcon.width = 50
+        
+
         let temp = document.createElement("span");
-        temp.textContent=element.temp;
+        temp.textContent=Math.trunc(element.temp);
+
         dayDiv.appendChild(day);
+        dayDiv.appendChild(weatherIcon);
         dayDiv.appendChild(temp);
         
         forecastDiv.appendChild(dayDiv);
+    
     })
     
 }
@@ -23,15 +37,21 @@ export function forecast(forecastData){
 export function hours(day){
     let hourlyDiv = document.getElementById("hourly");
     (day.hours).forEach((element)=>{
-        console.log(element.datetime)
+        
         let hourDiv = document.createElement("div");
         let time = document.createElement("span");
         time.textContent=timeIntoHour(element.datetime);
 
+        let weatherIcon = document.createElement("img");
+        weatherIcon.src = getWeatherIcon(element.icon);
+        weatherIcon.width=50;
+        weatherIcon.height=50;
+
         let temp = document.createElement("span");
         temp.textContent=Math.trunc(element.temp);
-
+        
         hourDiv.appendChild(time);
+        hourDiv.appendChild(weatherIcon);
         hourDiv.appendChild(temp);
         hourlyDiv.appendChild(hourDiv);
     });
