@@ -7,6 +7,7 @@ import { getWeatherIcon } from './weatherFunctions';
 
 export function forecast(forecastData){
     const forecastDiv = document.getElementById("forecast");
+    forecastDiv.innerHTML="";
     forecastData.forEach((element,index)=>{
         let dayDiv = document.createElement("div");
         dayDiv.classList ="forecastDay";
@@ -36,6 +37,7 @@ export function forecast(forecastData){
 
 export function hours(day){
     let hourlyDiv = document.getElementById("hourly");
+    hourlyDiv.innerHTML="";
     (day.hours).forEach((element)=>{
         
         let hourDiv = document.createElement("div");
