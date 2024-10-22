@@ -8,12 +8,13 @@ import { forecast, hours } from "./renderPageRight";
 
 let json;
 
-async function main(){
-
+async function main(optionalParam = "Portland"){
     
-
-
-    json = await getWeatherLocation("portland");
+    
+    json = await getWeatherLocation(optionalParam);
+    
+  
+   
     console.log(json)
    
     searchBar();
@@ -22,8 +23,26 @@ async function main(){
     currentWeatherInfoExtended(json);
     forecast(get5DayForecast(json));
     hours(json.days[0]);
+    add();
    
 }
+
+function add(){
+    const form = document.getElementById("searchForm");
+    const mainDiv = document.getElementById("main");
+    form.addEventListener("submit", (e)=>{
+        e.preventDefault();
+        const inputValue = document.getElementById("search").value;
+        console.log(inputValue)
+        
+        main(inputValue);
+        
+})
+
+}
+
+
+
 
 const container = document.querySelector("#forecast");
 container.addEventListener('click',(e)=>{

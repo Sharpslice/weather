@@ -3,16 +3,21 @@ import { currentCondition, getWeatherIcon } from "./weatherFunctions";
 
 export function searchBar(){
     let header = document.getElementById("header");
+    header.innerHTML="";
     let form = document.createElement("form");
+    form.id = "searchForm";
     let input = document.createElement("input");
     input.id = "search"
     input.placeholder = "City";
+    input.type= "text";
+    input.name ="search";
     form.appendChild(input);
     header.appendChild(form);
 }
 
 export function currentWeatherDisplay(json){
     let weatherDiv = document.getElementById("currentData");
+    weatherDiv.innerHTML="";
     let div = document.createElement("div");
     
 
@@ -34,7 +39,7 @@ export function currentWeatherDisplay(json){
 export function currentWeatherInfoExtended(json){
     let info = currentCondition(json);
     const weatherInfoDiv = document.getElementById("module");
-
+    weatherInfoDiv.innerHTML="";
   
 
     const weatherSymbolDiv = document.createElement("div");
