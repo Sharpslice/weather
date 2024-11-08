@@ -52,3 +52,11 @@ export function hourlyWeather(data){
     let hours = data.days[0].hours.slice(0,12);
     return hours;
 }
+
+function farenheitToCelcius(f){
+    return Math.trunc(((f-32) * 5/9));
+}
+export function convertTemp(temp,scale){
+    let newtemp = scale ? temp : farenheitToCelcius(temp) 
+    return newtemp;
+}

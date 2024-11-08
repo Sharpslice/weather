@@ -1,14 +1,16 @@
 
 import {format, parseISO} from 'date-fns';
 import {getHours,parse} from 'date-fns';
-import { getWeatherIcon } from './weatherFunctions';
+import { getWeatherIcon,convertTemp } from './weatherFunctions';
 
 
 
-export function forecast(forecastData){
+export function forecast(forecastData,tempScale){
     const forecastDiv = document.getElementById("forecast");
     forecastDiv.innerHTML="";
     forecastData.forEach((element,index)=>{
+
+        let weatherTemp = convertTemp(element.temp,tempScale);
         let dayDiv = document.createElement("div");
         dayDiv.classList ="forecastDay";
         dayDiv.setAttribute("day",index)
@@ -23,7 +25,7 @@ export function forecast(forecastData){
         
 
         let temp = document.createElement("span");
-        temp.textContent=Math.trunc(element.temp);
+        temp.textContent=Math.trunc(weatherTemp);
 
         dayDiv.appendChild(day);
         dayDiv.appendChild(weatherIcon);
@@ -35,11 +37,11 @@ export function forecast(forecastData){
     
 }
 
-export function hours(day){
+export function hours(day,tempScale){
     let hourlyDiv = document.getElementById("hourly");
     hourlyDiv.innerHTML="";
     (day.hours).forEach((element)=>{
-        
+        let weatherTemp = convertTemp(element.temp,tempScale);
         let hourDiv = document.createElement("div");
         let time = document.createElement("span");
         time.textContent=timeIntoHour(element.datetime);
@@ -50,7 +52,7 @@ export function hours(day){
         weatherIcon.height=50;
 
         let temp = document.createElement("span");
-        temp.textContent=Math.trunc(element.temp);
+        temp.textContent=Math.trunc(weatherTemp);
         
         hourDiv.appendChild(time);
         hourDiv.appendChild(weatherIcon);

@@ -1,7 +1,8 @@
-import { currentWeatherDisplay, searchBar,currentWeatherInfoExtended, switches } from "./renderPage";
-import { get5DayForecast, getWeatherLocation} from "./weatherFunctions";
+import { currentWeatherDisplay, searchBar,currentWeatherInfoExtended, switches, toggleTemp } from "./renderPage";
+import { farenheitToCelcius, get5DayForecast, getWeatherLocation} from "./weatherFunctions";
 
 import './styles.css';
+import './toggle.css';
 import { forecast, hours } from "./renderPageRight";
 
 
@@ -12,19 +13,19 @@ async function main(optionalParam = "Portland"){
     
     
     json = await getWeatherLocation(optionalParam);
-    
-  
-   
     console.log(json)
-   
-    searchBar();
-    
-    currentWeatherDisplay(json);
-    currentWeatherInfoExtended(json);
-    forecast(get5DayForecast(json));
-    hours(json.days[0]);
+    updateUI(json);  
     add();
    
+}
+
+function updateUI(json){
+    searchBar();
+    toggleTemp();
+    currentWeatherDisplay(json);
+    currentWeatherInfoExtended(json,false);
+    forecast(get5DayForecast(json),false);
+    hours(json.days[0],false);
 }
 
 function add(){

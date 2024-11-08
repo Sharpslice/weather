@@ -1,4 +1,4 @@
-import { currentCondition, getWeatherIcon } from "./weatherFunctions";
+import { convertTemp, currentCondition, farenheitToCelcius, getWeatherIcon } from "./weatherFunctions";
 
 
 export function searchBar(){
@@ -15,7 +15,26 @@ export function searchBar(){
     header.appendChild(form);
 }
 
+export function toggleTemp(){
+    let header =document.getElementById("header");
+    let toggleLabel = document.createElement("label");
+    let toggleInput = document.createElement("input");
+    toggleInput.type="checkbox";
+    let toggleSpan = document.createElement("span");
+
+    toggleLabel.id = "switch";
+    toggleInput.id = "checkbox";
+    toggleSpan.id ="slider round";
+
+    toggleLabel.appendChild(toggleInput);
+    toggleLabel.appendChild(toggleSpan);
+    header.appendChild(toggleLabel);
+}
+
 export function currentWeatherDisplay(json){
+    
+
+
     let weatherDiv = document.getElementById("currentData");
     weatherDiv.innerHTML="";
     let div = document.createElement("div");
@@ -36,8 +55,10 @@ export function currentWeatherDisplay(json){
     
 }
 
-export function currentWeatherInfoExtended(json){
+export function currentWeatherInfoExtended(json,tempScale){
     let info = currentCondition(json);
+    let weatherTemp = convertTemp(info.temp,tempScale);
+
     const weatherInfoDiv = document.getElementById("module");
     weatherInfoDiv.innerHTML="";
   
@@ -57,7 +78,7 @@ export function currentWeatherInfoExtended(json){
 
     const currentTempDiv = document.createElement("div");
     const temp = document.createElement("Span");
-    temp.textContent = `${Math.trunc(info.temp)} F°`;
+    temp.textContent = `${weatherTemp} F°`;
     currentTempDiv.appendChild(temp);
     weatherInfoDiv.appendChild(currentTempDiv)
 
